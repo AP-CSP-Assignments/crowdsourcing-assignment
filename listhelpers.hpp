@@ -28,9 +28,8 @@ void append(std::vector<T> &v, T const &val) {
   v.push_back(val);
 }
 
-template <typename T>
-void append(std::vector<T> &v, const char *str) {
-    append(v, std::string(str));
+void append(std::vector<std::string> &v, const char *str) {
+  append(v, std::string(str));
 }
 
 template <typename T>
