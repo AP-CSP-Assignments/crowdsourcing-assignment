@@ -11,6 +11,66 @@
 #include <string>    // std::string, std::getline
 #include <vector>    // std::vector
 
+int totalDuration(std::vector<int> list)
+{
+    int index = 0;
+    int total = 0;
+    while (index < length(list))
+    {
+        total = total + list[index];
+        index = index + 1;
+    }
+    return total;
+}
+
+double averageDuration(std::vector<int> list)
+{
+    // Turning the total duration to a double for proper division by C++
+    return (double) totalDuration(list) / length(list);
+}
+
+void printLongestDurationInfo(std::vector<std::string> names, std::vector<std::string> artists, std::vector<int> durations)
+{
+    int indexOfMax = 0;
+    int maxDuration = durations[0]; // assumes duration list has at least one element
+    int curr_index = 0;
+
+    // Finding the maximum algorithm
+    while (curr_index < length(names))
+    {
+        if (durations[curr_index] > maxDuration)
+        {
+            indexOfMax = curr_index;    // keep track of the position of the max song
+            maxDuration = durations[curr_index];    // update the max duration
+        }
+        curr_index = curr_index + 1;
+    }
+
+    // Out of the loop - maximum has been found
+    std::cout << "Longest song: " << names[indexOfMax] << " by " << artists[indexOfMax] << " for " << durations[indexOfMax] << " seconds\n";
+}
+
+void printShortestDurationInfo(std::vector<std::string> names, std::vector<std::string> artists, std::vector<int> durations)
+{
+    int indexOfMin = 0;
+    int minDuration = durations[0]; // assumes duration list has at least one element
+    int curr_index = 0;
+
+    // Finding the maximum algorithm
+    while (curr_index < length(names))
+    {
+        if (durations[curr_index] < minDuration)
+        {
+            indexOfMin = curr_index;    // keep track of the position of the min song
+            minDuration = durations[curr_index];    // update the min duration
+        }
+        curr_index = curr_index + 1;
+    }
+
+    // Out of the loop - maximum has been found
+    std::cout << "Shortest song: " << names[indexOfMin] << " by " << artists[indexOfMin] << " for " << durations[indexOfMin] << " seconds\n";
+}
+
 int main()
 {
     std::vector<std::string> song_names = {};
@@ -36,5 +96,10 @@ int main()
         std::cout << "Would you like to enter a new song (y/n)?\n";
         std::cin >> choice;
     }
+
+    std::cout << "Total duration: " << totalDuration(song_duration)
+              << "\nAverage duration: " << averageDuration(song_duration) << std::endl;
+    printLongestDurationInfo(song_names, song_artist, song_duration);
+    printShortestDurationInfo(song_names, song_artist, song_duration);
     return 0;
 }
